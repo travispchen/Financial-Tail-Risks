@@ -1,0 +1,671 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Tail Risk Analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsubsection{Travis Chen}\label{travis-chen}
+
+    \subsection{Introduction}\label{introduction}
+
+    A widely stated (and disputed) result is the "10 days" rule --- that if
+an investor were to exclude the best 10 days in market history then the
+stock market would be a horrible investment, and conversely, excluding
+the worst 10 days in market history would make it fantastic. Seyhun
+{[}1{]} visualized this result with various levels of outlier exclusion:
+
+    
+
+    Regardless of the degree to which such a result is overstated or relies
+on faulty assumptions, it is clear that evaluating tail end risks (and
+rewards) are crucial to understanding the success of financial
+strategies and institutions. Such "Black Swan" or "Tail End" events may
+be responsible for the vast majority of returns and losses on a given
+strategy.
+
+In this notebook, I hope to illustrate some examples of how tail end
+risk can affect investment strategies the way they're traditionally
+understood, particularly with regards to signal usage and hedge funds.
+In particular, I will touch upon how the hedge fund payout structure
+will even
+
+    \subsection{Why is it hard to predict tail ends (using signals)? Or,
+"Correlation
+Shmorrelation"}\label{why-is-it-hard-to-predict-tail-ends-using-signals-or-correlation-shmorrelation}
+
+    Assume we have a fund, Tail Capital that focuses on predicting tail end
+events. It develops a signal \(X\) that has above \(\rho_{threshold}\)
+correlation on back-tested returns \(Y\), and then trades in proportion
+to the strength of that signal.
+
+    As a few simplifying assumptions, let: 1. The signal \(X\) is normally
+distributed with 0 mean and standard deviation 1: \(X \sim N(0, 1)\) 2.
+The daily return \(Y\) is additive and also normally distributed with 0
+mean and standard deviation 1: \(Y \sim N(0, 1)\) 3. \(X\) and \(Y\)
+have a correlation of \(\rho\), that is:
+\(\frac{E[(X - \mu_{X})(Y - \mu_{Y})]}{\sigma_{X} \sigma_{Y}} = E[X Y] = 1\)
+
+    \textbf{(Note that this normality assumption often used in financial
+models may also itself be violated by certain tail risk challenges, but
+we will ignore this for now.)}
+
+    We wish to assess the conditional probability that \(Y > K\) given that
+\(X > K\), that is:
+
+\(P(Y > K | X > K) = \frac{P(X > K, Y > K)}{P(X > K)}\)
+
+Another interpretation of this expression is that this is the ratio of
+the probability of both \(X\) and \(Y\) exceeding some threshold \(K\)
+assuming correlation \(\rho\) over the probability of both \(X\) and
+\(Y\) exceeding \(K\) assuming correlation \(1\) (given that if the
+correlation is 1, then \(P(X > K, Y > K) = P(X > K)\). Taleb calls this
+the "proportion of certainty."
+
+    The evaluation of this expression (Taleb {[}2{]}) is performed as
+follows:
+
+    
+
+    The interpretation here is that for tail end events, i.e. when \(K\) is
+many standard deviations away from \(0\), a signal is almost meaningless
+in terms of telling us the odds that the output variable returns, \(Y\),
+are also greater than \(K\) unless the correlation \(\rho\) is very
+close to 1.
+
+In the words of Taleb, "Correlation between X and Y carries
+disproportionate information for the ordinary, and practically no
+information for the tails." As an illuminating example, assuming IQ is
+the signal and intelligence is the output, one would need something
+resembling \(\rho > 0.98\) to 'explain' genius with greater than 50\%
+confidence.
+
+    \subsection{A Simulated Example}\label{a-simulated-example}
+
+    Assume Tail Capital uses a highly leveraged strategy to capitalize on
+tail end predictions (i.e. by buying out of money puts). We evaluate, at
+different levels of correlation, what are the actual odds that Tail
+Capital actually lands on its predictions.
+
+Assume a naive strategy of buying the OOM option corresponding a
+thresholded signal (i.e. if our threshold is 3\(\sigma\) and the signal
+crosses 3\(\sigma\), then buy the put at 3\(\sigma\)). We evaluate the
+probability that our option reaches the exercise price at various level
+of \(\sigma\) and \(\rho\).
+
+We first sample our priors from a \(N(0, 1)\) distribution, then
+multiply our \((X, Y)\) matrix by the Cholesky factorization of the
+correlation matrix to embed the correlational dependence.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{eigh}\PY{p}{,} \PY{n}{cholesky}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
+         
+         \PY{n}{mu} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{sigma} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{num\PYZus{}trading\PYZus{}days} \PY{o}{=} \PY{l+m+mi}{100000}
+         \PY{n}{std\PYZus{}vals} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{3.5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mf}{4.5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Sampling various values of correlation, rho}
+         \PY{k}{for} \PY{n}{rho} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.99}\PY{p}{]}\PY{p}{:}
+             \PY{n}{std\PYZus{}signal\PYZus{}landing\PYZus{}pct} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Sampling various standard deviations to try to predict the output variable at}
+             \PY{k}{for} \PY{n}{n\PYZus{}std} \PY{o+ow}{in} \PY{n}{std\PYZus{}vals}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Initialize the \PYZdq{}prior\PYZdq{} of X, Y to be a normal distribution centered around 0 with standard deviation 1}
+                 \PY{n}{M} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{p}{(}\PY{n}{num\PYZus{}trading\PYZus{}days}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Use the Cholesky Factorization of R, the correlation matrix, to sample X and Y}
+                 \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{rho}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{rho}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+                 \PY{n}{L} \PY{o}{=} \PY{n}{cholesky}\PY{p}{(}\PY{n}{R}\PY{p}{,} \PY{n}{lower}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{M} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{M}\PY{p}{,} \PY{n}{L}\PY{p}{)}
+                 \PY{n}{X} \PY{o}{=} \PY{n}{M}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{Y} \PY{o}{=} \PY{n}{M}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         
+                 \PY{c+c1}{\PYZsh{} What percent of the time does our signal at n std out actually predict a price at n std out?}
+                 \PY{n}{num\PYZus{}signal\PYZus{}fired} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{num\PYZus{}correct\PYZus{}predictions} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{for} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{x} \PY{o}{\PYZgt{}} \PY{n}{n\PYZus{}std}\PY{p}{:}
+                         \PY{n}{num\PYZus{}signal\PYZus{}fired} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                         \PY{k}{if} \PY{n}{y} \PY{o}{\PYZgt{}} \PY{n}{n\PYZus{}std}\PY{p}{:}
+                             \PY{n}{num\PYZus{}correct\PYZus{}predictions} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{k}{elif} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{n}{n\PYZus{}std}\PY{p}{:}
+                         \PY{n}{num\PYZus{}signal\PYZus{}fired} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                         \PY{k}{if} \PY{n}{y} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{n}{n\PYZus{}std}\PY{p}{:}
+                             \PY{n}{num\PYZus{}correct\PYZus{}predictions} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                             
+                 \PY{c+c1}{\PYZsh{} Append the number of times, at correlation rho, our signal thresholded at std\PYZus{}val}
+                 \PY{c+c1}{\PYZsh{} correctly predicts the price at least the same number of standard deviations out}
+                 \PY{k}{if} \PY{n}{num\PYZus{}signal\PYZus{}fired} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{std\PYZus{}signal\PYZus{}landing\PYZus{}pct}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{std\PYZus{}signal\PYZus{}landing\PYZus{}pct}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{num\PYZus{}correct\PYZus{}predictions} \PY{o}{/} \PY{n}{num\PYZus{}signal\PYZus{}fired}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{std\PYZus{}vals}\PY{p}{,} \PY{n}{std\PYZus{}signal\PYZus{}landing\PYZus{}pct}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Std Dev Signal Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Probability of Reaching Threshold Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Probability of Reaching Threshold Price @ Std Dev Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} Text(0.5,1,'Probability of Reaching Threshold Price @ Std Dev Threshold')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The interpretation here is that once we try to predict our output
+variable, the price, at more than 3 standard deviations out, our signal
+becomes practically useless. The decay of our signal corresponding to
+the tail end also appears to be exponential.
+
+    \subsection{Why Hedge Funds are incentivized to practice Bad Tail end
+Risk
+Management?}\label{why-hedge-funds-are-incentivized-to-practice-bad-tail-end-risk-management}
+
+    Simply put, this is because hedge funds are paid annually on both a flat
+and commission fee basis, and do not symmetrically suffer the downside
+of losing their investors money (beyond firm 'blowup' at a certain
+threshold). Thus, a hedge fund manager may be incentivized to make
+asymmetric high probability of return but huge downside bets, thus
+becoming an optimization problem of maximizing \emph{time} to losses
+rather than maximizing \emph{returns}. As mentioned in class, they may
+be incentivized to simply sell very out of money options every year and
+hope that by the time there's a year that the strike prices hit, they're
+retired by then.
+
+    \subsection{A Contrived Example}\label{a-contrived-example}
+
+    Let us simulate hedge fund managers as operating under the following
+(made-up) incentive structure: 1. They get paid a flat rate of 1 dollar
+a year. 2. They get paid a 20\% commission of their net profit. 3. The
+fund shuts down if it has a year where it loses 10 dollars (it will
+shoulder 20\% of this loss). The fund continuously runs until it gets
+shut down.
+
+    To immediately see an issue with such a (contrived) incentive structure,
+consider 2 different (contrived) yearly strategies.
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\tightlist
+\item
+  99\% of gaining +10, 1\% chance of losing for -1000\\
+\item
+  80\% chance of gaining +10, 20\% chance of losing for -10
+\end{enumerate}
+
+    We can calculate that the yearly expected value for A is:\\
+\(0.99 * 10 - 0.01 * 1000 = -0.1\)
+
+And for B is:\\
+\(0.8 * 10 - 0.2 * 10 = +6\)
+
+It is fairly obvious that strategy A has higher expected returns thn
+strategy B. But, what is the expected payout to a hedge fund manager?
+
+    We can recursively calculate this expected utility based on the fact
+that if one of these strategies has a winning year, then it is as if the
+manager starts again fresh from the next year, with the payout from the
+previous year in the bank.
+
+    \(E[Strategy] = Flat Rate + Prob Winning Year (Commission Rate * Winning Payout + E[Strategy]) + Prob Losing Year * (Commision Rate * Losing Payout)\)
+
+\(E[A] = 1 + 0.99 * ((0.2 * 10) + E[A]) + 0.01 * (0.2 * -1000)\)\\
+\(E[A] = +98\)
+
+\(E[B] = 1 + 0.8 * ((0.2 * 10) + E[B]) + 0.2 * (0.2 * -10)\)\\
+\(E[B] = +11\)
+
+    Although Strategy A is far more risky (in terms of maximum possible
+loss) AND has lower expected value to investors, it has much higher
+expected payout to the hedge fund manager!
+
+    \subsection{Simulated Investment Hedge Fund
+Strategies}\label{simulated-investment-hedge-fund-strategies}
+
+    Let us define an investment strategy as a yearly distribution (summing
+to 1) of probability of integer payouts in the range \([-100, 100]\). We
+will simulate according to the same rules above, and evaluate both the
+expected value of a strategy and the expected utility to a hedge fund
+manager. We will also add a constraint that a fund will never exist for
+more than 100 years.
+
+We will sample the strategies, seeing the relationship between the
+expected value of the strategy and hedge fund manager payout; and see if
+the skewness (i.e. existence of tails) in the strategy has any
+relationship with payout above expectation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}
+          
+          \PY{n}{max\PYZus{}returns} \PY{o}{=} \PY{l+m+mi}{100}
+          
+          \PY{c+c1}{\PYZsh{} Gets expected value from relative weights by performing \PYZhy{}20 * P(return of \PYZhy{}20) + \PYZhy{}19 * P(return of \PYZhy{}19, etc.) + ...}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}expected\PYZus{}value\PYZus{}from\PYZus{}relative\PYZus{}weights}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{i} \PY{o}{*} \PY{n}{w} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{w} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{max\PYZus{}returns}\PY{p}{,} \PY{n}{max\PYZus{}returns}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{relative\PYZus{}weights}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{simulate\PYZus{}investment\PYZus{}fund\PYZus{}payout}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}\PY{p}{:}
+              \PY{n}{payout} \PY{o}{=} \PY{l+m+mi}{0}
+              
+              \PY{c+c1}{\PYZsh{} Maximum of 100 years}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{payout} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} Add 1, the fixed management fee }
+                  
+                  \PY{c+c1}{\PYZsh{} Sample yearly return from [\PYZhy{}20, 20] based on the relative weights distribution }
+                  \PY{n}{yearly\PYZus{}return} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{max\PYZus{}returns}\PY{p}{,} \PY{n}{max\PYZus{}returns}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                  
+                  \PY{c+c1}{\PYZsh{} Add the 20\PYZpc{} commission}
+                  \PY{n}{payout} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{0.2} \PY{o}{*} \PY{n}{yearly\PYZus{}return}
+                  
+                  \PY{c+c1}{\PYZsh{} If it has a \PYZhy{}10 or worse losing year, the fund ends}
+                  \PY{k}{if} \PY{n}{payout} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}
+                      \PY{k}{return} \PY{n}{payout}
+              \PY{k}{return} \PY{n}{payout}
+          
+          \PY{n}{expected\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{average\PYZus{}payouts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{skewness} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Get relative weights from each [\PYZhy{}20, 20] value from a uniform [0, 1] distribution,}
+              \PY{c+c1}{\PYZsh{} such that they sum to 1}
+              \PY{n}{relative\PYZus{}weights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{max\PYZus{}returns} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{relative\PYZus{}weights} \PY{o}{/}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Calculate expected value for investors from the randomly sampled investment strategy}
+              \PY{n}{ev} \PY{o}{=} \PY{n}{get\PYZus{}expected\PYZus{}value\PYZus{}from\PYZus{}relative\PYZus{}weights}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}
+              \PY{n}{expected\PYZus{}values}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ev}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Calculated expected payotut for hedge fund managers}
+              \PY{n}{simulated\PYZus{}payouts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{simulated\PYZus{}payouts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{simulate\PYZus{}investment\PYZus{}fund\PYZus{}payout}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}\PY{p}{)}
+                  
+              \PY{n}{average\PYZus{}payouts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{simulated\PYZus{}payouts}\PY{p}{)}\PY{p}{)}
+               
+              \PY{c+c1}{\PYZsh{} Calculate the skewness of the investment strategy distribution}
+              \PY{n}{skewness}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{skew}\PY{p}{(}\PY{n}{relative\PYZus{}weights}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{x} \PY{o}{=} \PY{n}{expected\PYZus{}values}
+          \PY{n}{y} \PY{o}{=} \PY{n}{average\PYZus{}payouts}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yearly Expected Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hedge Fund Manager Payout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hedge Fund Manager Payout vs. Strategy Yearly Expected Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} Text(0.5,1,'Hedge Fund Manager Payout vs. Strategy Yearly Expected Value')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Here we see that the expected value of a strategy in this setup has a
+weak at best relationship with how much a hedge fund manager can expect
+to be paid from the strategy.
+
+    We use skewness as a proxy for how fat the tails of the strategy return
+distribution are. Mathematically, skewness is defined as:
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{skewness}\PY{p}{,} \PY{n}{average\PYZus{}payouts}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Strategy Returns Skewness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hedge Fund Manager Payout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hedge Fund Manager Payout vs. Skewness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:} Text(0.5,1,'Hedge Fund Manager Payout vs. Skewness')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note that now get a much tighter relationship between investment
+strategy skewness to hedge fund manager payout than yearly expected
+value! This implies that under our contrived setup, \textbf{hedge fund
+managers are incentivized to pursue strategy with more tail end risk},
+to "accumulate bonuses before eventual "blowup" for which he does not
+have to repay previous compensation {[}and{]} make a series of
+asymmetric bets (high probability of small profits, small probability of
+large losses) below their probabilistic fair value" (Taleb {[}3{]})
+
+    \subsection{Conclusions}\label{conclusions}
+
+    We have demonstrated that\\
+1. Using correlation via signals may be inappropriate for identifying
+tail end returns\\
+2. Hedge fund managers have perverse incentives to maintain high
+probability of profit even at the risk of extreme tail end downside
+
+The solution to the problem is unclear, but likely lies in a realignment
+of incentives to \emph{make risk symmetric}, that is ensure that hedge
+fund managers share in the downside of their investments. As Taleb
+{[}3{]} articulates, "The captain goes down with the ship; all captains
+and all ships: making everyone involved in riskbearing accountable, no
+exception, not a single one --- morally, legally, whatever can be done."
+
+    \subsection{References}\label{references}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  STOCK MARKET EXTREMES AND PORTFOLIO PERFORMANCE. A study commissioned
+  by Towneley Capital Management and conducted by Professor H. Nejat
+  Seyhun, University of Michigan. 1993.
+  http://www.towneley.com/wp-content/uploads/2016/01/Research.-TCM-Mkt-Timing-Study-1993.pdf
+\item
+  Nassim Taleb's Twitter.
+  https://twitter.com/nntaleb/status/1135116646442590208. 2019
+\item
+  "Why did the Crisis of 2008 Happen?" Nassim Taleb. 2010.
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
